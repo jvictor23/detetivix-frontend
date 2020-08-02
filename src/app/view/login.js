@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,8 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-//import api from '../serverConnection/api'
+import api from '../../connection/api';
+import {mensagemError, mensagemSuccess} from '../components/toastr'
 
 function Copyright() {
   return (
@@ -52,23 +53,32 @@ export default function SignIn(props) {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
-  const[senha, setSenha] = useState('');
+  const [senha, setSenha] = useState('');
 
   document.body.style = "background: #000000"
 
-  function logar(){
-      /*api.post('/usuario/autenticar',{
+  function logar() {
+    if (email.trim()) {
+      if (senha.trim()) {
+
+        api.post('/user/authenticate', {
           email: email,
-          senha: senha
-      })
-      .then(res =>{
-        console.log(res);
-        localStorage.setItem('_usuarioLogado', JSON.stringify(res.data))
-        props.history.push('/admin/home');
-      })
-      .catch(error =>{
-          console.log(error);
-      })*/
+          password: senha
+        })
+          .then(res => {
+            localStorage.setItem('_usuarioLogado', JSON.stringify(res.data))
+            props.history.push('/admin/home');
+          })
+          .catch(error => {
+            mensagemError(error.response.data.error);
+          })
+
+      } else {
+        mensagemError("O campo senha não pode ficar vazio!")
+      }
+    } else {
+      mensagemError("O campo email não pode ficar vazio!")
+     }
   }
 
   return (
@@ -78,7 +88,7 @@ export default function SignIn(props) {
         <Avatar className={classes.avatar}>
           <PanToolIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" style={{color: "white"}}>
+        <Typography component="h1" variant="h5" style={{ color: "white" }}>
           Login
         </Typography>
         <form className={classes.form} noValidate>
@@ -92,10 +102,10 @@ export default function SignIn(props) {
             name="email"
             autoComplete="off"
             color="secondary"
-            style={{background: "#F5F5F5"}}
+            style={{ background: "#F5F5F5" }}
             autoFocus
             value={email}
-            onChange={e=>setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="filled"
@@ -107,10 +117,10 @@ export default function SignIn(props) {
             type="password"
             id="password"
             color="secondary"
-            style={{background: "#F5F5F5"}}
+            style={{ background: "#F5F5F5" }}
             autoComplete="current-password"
             value={senha}
-            onChange={e=>setSenha(e.target.value)}
+            onChange={e => setSenha(e.target.value)}
           />
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -132,9 +142,9 @@ export default function SignIn(props) {
               </Link>
             </Grid>*/}
             <Grid item>
-               <Link href="/cadastro" variant="body2" style={{color: "white"}}>
+              <Link href="/cadastro" variant="body2" style={{ color: "white" }}>
                 {"Não tem uma conta? Cadastre-se"}
-              </Link> 
+              </Link>
             </Grid>
           </Grid>
         </form>

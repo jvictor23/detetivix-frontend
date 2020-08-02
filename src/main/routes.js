@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from '../view/login'
-import Cadastro from '../view/cadastrousuario'
+import Login from '../app/view/login'
+import Cadastro from '../app/view/cadastrousuario'
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 

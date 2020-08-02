@@ -10,7 +10,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import api from '../serverConnection/api'
+import api from '../../connection/api'
+import {mensagemError, mensagemSuccess} from '../components/toastr'
 
 function Copyright() {
   return (
@@ -59,18 +60,34 @@ export default function SignUp() {
   document.body.style = "background: #000000"
 
   function cadastrar(){
-    //   api.post('/usuario/cadastro',{
-    //       nome: nome,
-    //       sobrenome: sobrenome,
-    //       email: email,
-    //       senha: senha
-    //   })
-    //   .then(res=>{
-    //       console.log(res)
-    //   })
-    //   .catch(error=>{
-    //       console.log(error)
-    //   })
+      if(nickname.trim()){
+        if(email.trim()){
+          if(senha.trim()){
+
+            api.post('/user/register',{
+              nickname: nickname,
+              email: email,
+              password: senha
+          })
+          .then(res=>{
+            mensagemSuccess("Usuario cadastrado com sucesso!")
+            setNickname('');
+            setEmail('');
+            setSenha('');
+          })
+          .catch((error)=>{
+              mensagemError(error.response.data.error);
+          })
+
+          }else{
+            mensagemError("O campo senha não pode ficar vazio!")
+          }
+        }else{
+          mensagemError("O campo email não pode ficar vazio!")
+        }
+      }else{
+        mensagemError("O campo nickname não pode ficar vazio!")
+      }
   }
 
   
