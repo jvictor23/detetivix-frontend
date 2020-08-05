@@ -1,14 +1,14 @@
 import React from 'react'
-import NavbarItem from './navbarItem.js'
+
+
+
+
 
 function Navbar(props) {
+    
     return (
         <div className="container-fluid p-0">
-            <nav className="navbar navbar-expand-md navbar-light" style={{backgroundColor:"#EEEDEC"}}>
-                <a className="navbar-brand" href="/">
-
-                    { <img  style={{width:"1cm", height:"1cm", marginLeft:"100px"}}/> }
-                </a>
+            <nav className="navbar navbar-expand-md navbar-dark" style={{ backgroundColor: "#000000" }}>
 
                 <button
                     className="navbar-toggler"
@@ -21,10 +21,10 @@ function Navbar(props) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <section className="collapse navbar-collapse" id="navbarMainToggler">
-                    <div className="navbar-nav ml-auto">
-                        <NavbarItem href={props.href} label={props.item} />
-                        {/*<NavbarItem href="/login" label="Login" />
-                        <NavbarItem href="/cadastro-usuario" label="Cadastro" />*/}
+                    <div className="navbar ml-auto">
+
+                       {props.children}
+
                     </div>
 
                 </section>

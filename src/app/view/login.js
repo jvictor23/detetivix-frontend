@@ -66,8 +66,9 @@ export default function SignIn(props) {
           password: senha
         })
           .then(res => {
+            mensagemSuccess("Seja bem vindo!")
             localStorage.setItem('_usuarioLogado', JSON.stringify(res.data))
-            props.history.push('/admin/home');
+            props.history.push('/missao');
           })
           .catch(error => {
             mensagemError(error.response.data.error);
