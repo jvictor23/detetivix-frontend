@@ -71,7 +71,9 @@ export default function SignIn(props) {
             props.history.push('/missao');
           })
           .catch(error => {
-            mensagemError(error.response.data.error);
+            if(error){
+              mensagemError(error.response.data.error); 
+            }
           })
 
       } else {

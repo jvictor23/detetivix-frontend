@@ -31,7 +31,7 @@ class Perfil extends React.Component {
     if (this.state.image === '') {
       document.getElementById('fileid').click();
       document.getElementById('fileid').addEventListener('change', () => {
-        document.getElementById('abrirmodal').click();
+      document.getElementById('abrirmodal').click();
         const formData = new FormData();
         formData.append(
           'file',
@@ -125,7 +125,7 @@ class Perfil extends React.Component {
 
           <div style={{ marginTop: 40 }}>
             <input id='fileid' type='file' name='filename' hidden />
-            <Button id="uploadImage" variant="outlined" color="secondary" /* className={classes.submit}*/ onClick={this.adicionarImagem}> {this.state.image.trim() ? "Atualizar Imagem" : "Adicionar Imagem"} </Button>
+            <Button id="uploadImage" variant="outlined" color="secondary" onClick={this.adicionarImagem}> {this.state.image === '' ? "Atualizar Imagem" : "Adicionar Imagem"} </Button>
             <button id="abrirmodal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" hidden>Launch static backdrop modal</button>
             <div className="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered" role="document">
