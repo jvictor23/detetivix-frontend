@@ -20,7 +20,8 @@ class Missao extends React.Component {
             tituloMissao: '',
             respostaMissao: '',
             idMissao: '',
-            estadoMissao: ''
+            estadoMissao: '',
+            valorMissao: ''
         }
         document.body.style = "background: #000000"
     }
@@ -34,7 +35,8 @@ class Missao extends React.Component {
         })
             .then(res => {
                 console.log(res.data)
-                this.setState({ tituloMissao: res.data.titulo, idMissao: res.data._id, estadoMissao: res.data.EstadoMissao });
+                //Estado missao é para saber se ela já foi concluida
+                this.setState({ tituloMissao: res.data.titulo, idMissao: res.data._id, estadoMissao: res.data.EstadoMissao, valorMissao: res.data.valor});
             })
             .catch(error => {
                 console.log(error.response)
@@ -54,7 +56,8 @@ class Missao extends React.Component {
         api.post('/missao/verify', {
             resposta: this.state.respostaMissao,
             idMissao: this.state.idMissao,
-            idUser: usuarioLogado.user._id
+            idUser: usuarioLogado.user._id,
+            valorMissao: this.state.valorMissao
         }, {
             headers: { "Authorization": "Bearer " + usuarioLogado.token }
         })
@@ -105,7 +108,7 @@ class Missao extends React.Component {
                     <Container maxWidth="sm">
                         <hr style={{ background: '#f50057' }} />
                         <p className="text-break" style={{ color: '#f50057' }} >
-                            {this.state.tituloMissao}
+                            {this.state.tituloMissao} - Valor da missão: {this.state.valorMissao} pontos
                         </p>
                         <hr style={{ background: '#f50057' }} />
                         <TextField

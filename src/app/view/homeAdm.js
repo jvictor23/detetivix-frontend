@@ -38,7 +38,12 @@ class HomeAdm extends React.Component {
                     },{
                         headers: {"Authorization": "Bearer "+usuarioLogado.token}
                     }).then(res=>{
-                        mensagemSuccess("Missão criada com sucesso!")
+                        if(res.data.error){
+                            mensagemError(res.data.error);
+                        }else{
+                            mensagemSuccess("Missão criada com sucesso!");
+                            this.setState({tituloMissao: '', respostaMissao: '', valorMissao: ''})
+                        }
                     }).catch(error=>{
                         console.log(error.response)
                     })
