@@ -4,7 +4,7 @@ const app = express();
 
 const configs = {
     caminho: "build", //Aqui será definido a pasta de saída onde contém o index.html e os outros arquivos.
-    forcarHTTPS: false, //Defina para true se desejar que o redirecionamento para HTTPS seja forçado (é necessário certificado SSL ativo)
+    forcarHTTPS: true, //Defina para true se desejar que o redirecionamento para HTTPS seja forçado (é necessário certificado SSL ativo)
     port: process.env.PORT || 3000
 }
 
@@ -16,7 +16,7 @@ if (configs.forcarHTTPS) //Se o redirecionamento HTTP estiver habilitado, regist
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
     });
 
-app.use(express.static(configs.caminho)); //Serve os outros arquivos, como CSSs, Javascripts, Imagens etc.
+app.use(express.static(__dirname, configs.caminho)); //Serve os outros arquivos, como CSSs, Javascripts, Imagens etc.
 
 app.get("*", (req, res) => {// O wildcard '*' serve para servir o mesmo index.html independente do caminho especificado pelo navegador.
     const index = path.join(__dirname, configs.caminho, "index.html");
