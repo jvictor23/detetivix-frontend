@@ -20,7 +20,6 @@ app.use(express.static(configs.caminho)); //Serve os outros arquivos, como CSSs,
 
 app.get("*", (req, res) => {// O wildcard '*' serve para servir o mesmo index.html independente do caminho especificado pelo navegador.
     const index = path.join(__dirname, configs.caminho, "index.js");
-    console.log(index);
     res.sendFile(index);
 });
 
