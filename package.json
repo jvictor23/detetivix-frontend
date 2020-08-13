@@ -18,7 +18,7 @@
     "toastr": "^2.1.4"
   },
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server",
     "postinstall": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
