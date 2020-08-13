@@ -19,7 +19,7 @@ if (configs.forcarHTTPS) //Se o redirecionamento HTTP estiver habilitado, regist
 app.use(express.static(configs.caminho)); //Serve os outros arquivos, como CSSs, Javascripts, Imagens etc.
 
 app.get("*", (req, res) => {// O wildcard '*' serve para servir o mesmo index.html independente do caminho especificado pelo navegador.
-    res.sendFile(path.join(__dirname, configs.caminho, "index.html"));
+    res.sendFile(path.join(configs.caminho, "index.html"));
 });
 
 app.listen(configs.port, () => {
