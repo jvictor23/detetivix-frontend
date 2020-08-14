@@ -19,7 +19,7 @@ const configs = {
 app.use(express.static(path.join(__dirname, 'src'))); //Serve os outros arquivos, como CSSs, Javascripts, Imagens etc.
 
 app.get("*", (req, res) => {// O wildcard '*' serve para servir o mesmo index.html independente do caminho especificado pelo navegador.
-    const index = path.join(__dirname, 'src', "index.js");
+    const index = path.join(__dirname, 'src', "index.html");
     res.sendFile(index);
 });
 
